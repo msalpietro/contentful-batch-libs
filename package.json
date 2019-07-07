@@ -10,7 +10,7 @@
     "build": "npm run clean && babel lib --out-dir dist",
     "clean": "npm run clean:build && rimraf coverage",
     "clean:build": "rimraf dist",
-    "prepublish": "in-publish && npm run build || not-in-publish",
+    "prepublish": "npm run snyk-protect; in-publish && npm run build || not-in-publish",
     "postpublish": "npm run clean",
     "lint": "eslint lib test/* test",
     "pretest": "npm run lint",
@@ -26,7 +26,8 @@
     "devdep:install": "npm run devdep:build && rm -rf node_modules/contentful-management.js && npm install ../contentful-management.js && npm run devdep:clean",
     "devdep:uninstall": "npm run devdep:clean && rimraf node_modules/contentful-management.js",
     "precommit": "npm run lint",
-    "prepush": "npm run test:only"
+    "prepush": "npm run test:only",
+    "snyk-protect": "snyk protect"
   },
   "dependencies": {
     "bluebird": "^3.3.3",
@@ -35,7 +36,8 @@
     "listr": "^0.11.0",
     "listr-verbose-renderer": "^0.4.0",
     "lodash": "^4.0.1",
-    "npmlog": "^4.0.2"
+    "npmlog": "^4.0.2",
+    "snyk": "^1.192.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
@@ -87,5 +89,6 @@
   "bugs": {
     "url": "https://github.com/contentful/contentful-batch-libs/issues"
   },
-  "homepage": "https://github.com/contentful/contentful-batch-libs#readme"
+  "homepage": "https://github.com/contentful/contentful-batch-libs#readme",
+  "snyk": true
 }
